@@ -6,17 +6,18 @@ import React from 'react';
 
 // login option 3 routing
 // const FormDynamic = lazy(() => import('../pages/formDynamic/index'));
-import FormDynamic from '../pages/formDynamic/index'
+import FormDynamic from '../components/views/formDynamic/index'
+import Navbar from '../components/organisms/navbar'
 
 const FormDynamicRouter = {
-    path: '/FormDynamic/',
-    element: <FormDynamic />,
-    // children: [
-    //     {
-    //         path: '/pages/login/login3',
-    //         element: <AuthLogin3 />
-    //     },
-    // ]
+    path: '/',
+    element: <Navbar />,
+    children: [
+        {
+            path: '/FormDynamic/',
+            element: <FormDynamic />
+        },
+    ]
 };
 
 export default FormDynamicRouter;
