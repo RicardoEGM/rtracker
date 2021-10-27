@@ -1,0 +1,99 @@
+{
+    "Fields": [
+      {
+        "idField": 1,
+        "NameField": "scrtUser",
+        "LabelField": "Suscription User",
+        "Type": "Dropdown",
+        "Placeholder": "Select Suscription User",
+        "Value": "",
+        "Options": [
+          {
+            "Value": 15,
+            "Text": "Costo $15"
+          },
+          {
+            "Value": 25,
+            "Text": "Costo $25"
+          },
+          {
+            "Value": 35,
+            "Text": "Costo $35"
+          }
+        ],
+        "Attribut": " ",
+        "CascadeTrigger": false,
+        "Cascade": {},
+        "Show": true
+      },
+      {
+        "idField": 2,
+        "NameField": "textNameUser",
+        "LabelField": "Name User",
+        "Type": "TextBox",
+        "Placeholder": "Escriba el nombre del empleado",
+        "Attribut": " ",
+        "Value": "",
+        "Options": [],
+        "CascadeTrigger": false,
+        "Cascade": {},
+        "Show": true
+      },
+      {
+        "idField": 3,
+        "NameField": "textNameUser",
+        "LabelField": "Name User",
+        "Type": "TextBox",
+        "Placeholder": "Escriba el nombre del empleado",
+        "Attribut": " ",
+        "Value": "",
+        "Options": [],
+        "CascadeTrigger": false,
+        "Cascade": {},
+        "Show": true
+      },
+      {
+        "idField": 4,
+        "NameField": "textNameUser",
+        "LabelField": "Name User",
+        "Type": "TextBox",
+        "Placeholder": "Escriba el nombre del empleado",
+        "Attribut": " ",
+        "Value": "",
+        "Options": [],
+        "CascadeTrigger": false,
+        "Cascade": {},
+        "Show": true
+      },
+      {
+        "idField": 5,
+        "NameField": "drpdwnCost",
+        "LabelField": "Costo Suscription",
+        "Type": "Dropdown Cascade",
+        "Placeholder": "Elija la suscripcion del empleado",
+        "Attribut": "",
+        "Value": "",
+        "Options": [],
+        "CascadeTrigger": true,
+        "Cascade": [
+          {
+            "Value": 45,
+            "Text": "Precio 15$",
+            "Calling": []
+          },
+          {
+            "Value": 46,
+            "Text": "Precio 25$",
+            "Calling": []
+          },
+          {
+            "Value": 47,
+            "Text": "Precio 35$",
+            "Calling": []
+          }
+        ],
+        "Show": true
+      }
+    ]
+  }
+  

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -10,9 +10,8 @@ import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import itemList from './items';
+import DynamicFormIcon from '@mui/icons-material/DynamicForm';
+import DesignServicesIcon from '@mui/icons-material/DesignServices';
 
 const drawerWidth = 240;
 
@@ -38,21 +37,26 @@ export default function Navbar() {
                 <Toolbar />
                 <Box sx={{ overflow: 'auto' }}>
                     <List>
-                        {itemList.map((element, index) => (
-                            element.map((item) => {
-
-                                <ListItem button key={item.id}>
-                                    <ListItemIcon>
-                                        {item.icon}
-                                    </ListItemIcon>
-                                    <ListItemText primary={item.title} />
-                                </ListItem>
-                            })
-                        ))}
+                        <Link to="/FormDynamic/">
+                            <ListItem button key={`ListItem-${0}`}>
+                                <ListItemIcon>
+                                    <DynamicFormIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Form"} />
+                            </ListItem>
+                        </Link>
+                        <Link to="/FormDynamic/">
+                            <ListItem button key={`ListItem-${1}`}>
+                                <ListItemIcon>
+                                    <DesignServicesIcon />
+                                </ListItemIcon>
+                                <ListItemText primary={"Design"} />
+                            </ListItem>
+                        </Link>
                     </List>
                 </Box>
             </Drawer >
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Box component="main" sx={{ display: 'grid', marginLeft: 2, marginTop: 9 }} >
                 <Outlet />
             </Box>
         </Box >

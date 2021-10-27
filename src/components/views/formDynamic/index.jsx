@@ -1,69 +1,154 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import { alpha } from '@mui/material/styles';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import InputMapper from '../../atoms/inputMapper';
 
-export default function formDynamic() {
+
+const FormDynamic = () => {
+    const [DynamicForm, setDynamicForm] = React.useState({
+        Fields: [
+            {
+                idField: 1,
+                NameField: 'scrtUser',
+                LabelField: 'Suscription User',
+                Type: 'Dropdown',
+                PlaceholderInput: 'Select Suscription User',
+                Value: '',
+                Options: [
+                    {
+                        Value: 15,
+                        Text: 'Costo $15'
+                    },
+                    {
+                        Value: 25,
+                        Text: 'Costo $25'
+                    },
+                    {
+                        Value: 35,
+                        Text: 'Costo $35'
+                    }
+                ],
+                Attribut: '',
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
+            },
+            {
+                idField: 2,
+                NameField: 'textNameUser',
+                LabelField: 'Name User',
+                Type: 'TextBox',
+                PlaceholderInput: 'Escriba el nombre del empleado',
+                Attribut: '',
+                Value: '',
+                Options: [],
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
+            },
+            {
+                idField: 3,
+                NameField: 'textUbi',
+                LabelField: 'Vivienda',
+                Type: 'TextArea',
+                PlaceholderInput: 'Escriba la ubicacion del empleado',
+                Attribut: '',
+                Value: '',
+                Options: [],
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
+            },
+            {
+                idField: 4,
+                NameField: 'numhabitantes',
+                LabelField: 'Numero de habitantes',
+                Type: 'Number',
+                PlaceholderInput: 'Escriba el numero de personas que viven con usted',
+                Attribut: '',
+                Value: '',
+                Options: [],
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
+            },
+            {
+                idField: 5,
+                NameField: 'drpdwnCost',
+                LabelField: 'Tiempo de pago',
+                Type: 'Dropdown Cascade',
+                PlaceholderInput: 'Elija la suscripcion del empleado',
+                Attribut: '',
+                Value: '',
+                Options: [
+                    { id: 1, Value: 45, Text: 'Precio 15$', Calling: [6] },
+                    {
+                        id: 2,
+                        Value: 46,
+                        Text: 'Precio 25$',
+                        Calling: [7]
+                    },
+                    {
+                        id: 3,
+                        Value: 47,
+                        Text: 'Precio 35$',
+                        Calling: [8, 9]
+                    }
+                ],
+                CascadeTrigger: true,
+                Show: true
+            }
+        ]
+    });
+
+    const cascadeInputs = (children) => {
+        // setChildrenInput(children);
+        const idChildren = children[0].children;
+
+        // eslint-disable-next-line prefer-const
+        let copyFrom = DynamicForm;
+        const sprtInput = copyFrom.Fields.filter((f) => f.children === idChildren);
+
+        if (sprtInput != null) {
+            sprtInput.forEach((element) => {
+                const id = copyFrom.Fields.indexOf(element);
+                if (id > -1) {
+                    copyFrom.Fields.splice(id, 1);
+                }
+            });
+            // console.log('Entrando?');
+            // // copyFrom.Fields.filter((f) => f.Attribut === 0);
+            // copyFrom.Fields.forEach((element) => {
+            //     element.children === idChildren -1 :;
+            // });
+        }
+
+        children.forEach((element) => {
+            copyFrom.Fields.push(element);
+        });
+
+        setDynamicForm({
+            Fields: copyFrom.Fields
+        });
+    };
+
     return (
         <Box
+            component="form"
             sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
-                alignItems: 'center',
-                bgcolor: 'background.paper',
-                overflow: 'hidden',
-                borderRadius: '12px',
-                boxShadow: 1,
-                fontWeight: 'bold',
+                display: 'grid',
+                gap: 1,
+                gridTemplateColumns: 'repeat(6, 1fr)',
+                '&.MuiTextField-root': { m: 1, width: '25ch' },
             }}
-        >
-            <Box
-                component="img"
-                sx={{
-                    height: 233,
-                    width: 350,
-                    maxHeight: { xs: 233, md: 167 },
-                    maxWidth: { xs: 350, md: 250 },
-                }}
-                alt="The house from the offer."
-                src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&w=350&dpr=2"
-            />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: { xs: 'center', md: 'flex-start' },
-                    m: 3,
-                    minWidth: { md: 350 },
-                }}
-            >
-                <Box component="span" sx={{ fontSize: 16, mt: 1 }}>
-                    123 Main St, Phoenix AZ
-                </Box>
-                <Box component="span" sx={{ color: 'primary.main', fontSize: 22 }}>
-                    $280,000 — $310,000
-                </Box>
-                <Box
-                    sx={{
-                        mt: 1.5,
-                        p: 0.5,
-                        backgroundColor: (theme) => alpha(theme.palette.primary.main, 0.1),
-                        borderRadius: '5px',
-                        color: 'primary.main',
-                        fontWeight: 'medium',
-                        display: 'flex',
-                        fontSize: 12,
-                        alignItems: 'center',
-                        '& svg': {
-                            fontSize: 21,
-                            mr: 0.5,
-                        },
-                    }}
-                >
-                    <ErrorOutlineIcon />
-                    CONFIDENCE SCORE 85%
-                </Box>
-            </Box>
-        </Box>
+            autoComplete="off">
+            {DynamicForm.Fields.map((field, key) => (
+                <div key={`Div-${field.idField}`} >
+                    <InputMapper key={key} properties={field} cascadeInputs={cascadeInputs} />
+                </div>
+            ))
+            }
+        </Box >
     );
-}
+};
+
+export default FormDynamic;
