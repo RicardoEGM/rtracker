@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import InputMapper from '../../atoms/inputMapper';
+import InputMapper from '../../molecules/inputMapper';
 
 
 const FormDynamic = () => {
