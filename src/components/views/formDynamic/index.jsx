@@ -68,7 +68,6 @@ const FormDynamic = () => {
                 Value: '',
                 Options: [],
                 CascadeTrigger: false,
-                Cascade: {},
                 Show: true
             },
             {
@@ -95,41 +94,25 @@ const FormDynamic = () => {
                     }
                 ],
                 CascadeTrigger: true,
+                Cascade: [],
                 Show: true
             }
         ]
     });
 
-    const cascadeInputs = (children) => {
-        // setChildrenInput(children);
-        const idChildren = children[0].children;
 
-        // eslint-disable-next-line prefer-const
-        let copyFrom = DynamicForm;
-        const sprtInput = copyFrom.Fields.filter((f) => f.children === idChildren);
+    const addCascadeInputs = (IdInputs, Children) => {
+        // const DynamicFormCopy = [...DynamicForm];
+        console.log('Index')
+        console.log(IdInputs)
+        console.log(Children)
+        // setDynamicForm(DynamicFormCopy);
+    }
 
-        if (sprtInput != null) {
-            sprtInput.forEach((element) => {
-                const id = copyFrom.Fields.indexOf(element);
-                if (id > -1) {
-                    copyFrom.Fields.splice(id, 1);
-                }
-            });
-            // console.log('Entrando?');
-            // // copyFrom.Fields.filter((f) => f.Attribut === 0);
-            // copyFrom.Fields.forEach((element) => {
-            //     element.children === idChildren -1 :;
-            // });
-        }
+    // setDynamicForm({
+    //     Fields: copyFrom.Fields
+    // });
 
-        children.forEach((element) => {
-            copyFrom.Fields.push(element);
-        });
-
-        setDynamicForm({
-            Fields: copyFrom.Fields
-        });
-    };
 
     return (
         <Box
@@ -143,7 +126,7 @@ const FormDynamic = () => {
             autoComplete="off">
             {DynamicForm.Fields.map((field, key) => (
                 <div key={`Div-${field.idField}`} >
-                    <InputMapper key={key} properties={field} cascadeInputs={cascadeInputs} />
+                    <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
                 </div>
             ))
             }

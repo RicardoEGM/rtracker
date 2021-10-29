@@ -4,8 +4,8 @@ import { Select, MenuItem, InputLabel, FormControl } from '@mui/material/';
 
 
 const SCascade = (props) => {
-    const { LabelField, Value, idField, Options, PlaceholderInput, NameField, cascadeInputs } = props.Properties;
-    console.log(props.Properties);
+    const { LabelField, Value, idField, Options, PlaceholderInput, NameField, Cascade } = props.Properties;
+    // const { setCascade } = props.setCascade;
     const [value, setValue] = React.useState(Value);
 
 
@@ -72,16 +72,20 @@ const SCascade = (props) => {
             resultObj.push(callback.find((f) => f.idField === element));
         });
 
-        console.log(resultObj);
         resultObj.forEach((element) => {
             element.children = idField;
         });
-
-        cascadeInputs(resultObj);
-
+        console.log("Cascade");
+        console.log(resultObj);
+        props.setCascade(resultObj);
         setValue(e);
+
+        RenderCascade();
     };
 
+    const RenderCascade = () => {
+        // console.log(Cascade);
+    }
 
 
 

@@ -5,6 +5,39 @@ import SCascade from '../atoms/inputs/sCascade';
 
 const InputMapper = (props) => {
     const { properties } = props;
+    //addCascadeInputs
+    const setCascade = (children) => {
+        console.log("InputMapper");
+        // console.log(children)
+        console.log(props)
+        const idChildren = children[0].children;
+        props.addCascadeInputs(idChildren, children);
+        // setChildrenInput(children);
+        // properties.Cascade.push(children);
+        // let copyFrom = DynamicForm;
+        // const sprtInput = copyFrom.Fields.filter((f) => f.children === idChildren);
+
+        // if (sprtInput != null) {
+        //     sprtInput.forEach((element) => {
+        //         const id = copyFrom.Fields.indexOf(element);
+        //         if (id > -1) {
+        //             copyFrom.Fields.splice(id, 1);
+        //         }
+        //     });
+        //     // console.log('Entrando?');
+        //     // // copyFrom.Fields.filter((f) => f.Attribut === 0);
+        //     // copyFrom.Fields.forEach((element) => {
+        //     //     element.children === idChildren -1 :;
+        //     // });
+        // }
+
+
+        // sprtInput.Cascade.push(children);
+        // children.forEach((element) => {
+        //     copyFrom.Fields.push(element);
+        // });
+
+    };
 
     //#region Stop
 
@@ -107,7 +140,7 @@ const InputMapper = (props) => {
         case 'Dropdown Cascade':
             console.log(properties);
             return (
-                <SCascade Properties={properties} />
+                <SCascade Properties={properties} setCascade={setCascade} />
             );
         default:
             return <h1>Do not define input, Input Type is:{properties.Type}</h1>;
