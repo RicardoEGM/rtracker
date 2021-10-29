@@ -29,7 +29,7 @@ const FormDynamic = () => {
                 ],
                 Attribut: '',
                 CascadeTrigger: false,
-                Cascade: {},
+                Cascade: [],
                 Show: true
             },
             {
@@ -42,20 +42,20 @@ const FormDynamic = () => {
                 Value: '',
                 Options: [],
                 CascadeTrigger: false,
-                Cascade: {},
+                Cascade: [],
                 Show: true
             },
             {
                 idField: 3,
                 NameField: 'textUbi',
                 LabelField: 'Vivienda',
-                Type: 'TextArea',
+                Type: 'TextBox',
                 PlaceholderInput: 'Escriba la ubicacion del empleado',
                 Attribut: '',
                 Value: '',
                 Options: [],
                 CascadeTrigger: false,
-                Cascade: {},
+                Cascade: [],
                 Show: true
             },
             {
@@ -68,6 +68,7 @@ const FormDynamic = () => {
                 Value: '',
                 Options: [],
                 CascadeTrigger: false,
+                Cascade: [],
                 Show: true
             },
             {
@@ -102,17 +103,20 @@ const FormDynamic = () => {
 
 
     const addCascadeInputs = (IdInputs, Children) => {
-        // const DynamicFormCopy = [...DynamicForm];
-        console.log('Index')
-        console.log(IdInputs)
-        console.log(Children)
-        // setDynamicForm(DynamicFormCopy);
+
+        const FieldsCopy = [...DynamicForm.Fields];
+
+        FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade = [];
+        Children.forEach((item) => {
+            FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.push(item);
+        });
+
+        setDynamicForm({ Fields: FieldsCopy });
     }
 
     // setDynamicForm({
     //     Fields: copyFrom.Fields
     // });
-
 
     return (
         <Box
@@ -124,12 +128,26 @@ const FormDynamic = () => {
                 '&.MuiTextField-root': { m: 1, width: '25ch' },
             }}
             autoComplete="off">
-            {DynamicForm.Fields.map((field, key) => (
-                <div key={`Div-${field.idField}`} >
-                    <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
-                </div>
-            ))
-            }
+            {/* Input  */}
+            {DynamicForm.Fields.map((field, key) => {
+                let render = [];
+                render.push(
+                    <div key={`Div-${field.idField}`} >
+                        <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
+                    </div>);
+
+                // Cascade Input
+                if (field.CascadeTrigger && field.Cascade.length > 0) {
+
+                    field.Cascade.forEach((fieldCascade, key_fieldCascade) => {
+                        render.push(
+                            <div key={`DivCascade-${field.idField}`} >
+                                <InputMapper key={key_fieldCascade} properties={fieldCascade} addCascadeInputs={addCascadeInputs} />
+                            </div>)
+                    })
+                };
+                return render
+            })}
         </Box >
     );
 };

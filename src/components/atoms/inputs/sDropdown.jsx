@@ -26,7 +26,7 @@ const SDropdown = (props) => {
                     {PlaceholderInput}
                 </MenuItem>
                 {Options.map((element) => (
-                    <MenuItem value={element.Value}>{element.Text}</MenuItem>
+                    <MenuItem key={`CustomOptions-${element.id}`} value={element.Value}>{element.Text}</MenuItem>
                 ))}
             </Select>
         </FormControl>

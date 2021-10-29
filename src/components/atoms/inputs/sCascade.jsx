@@ -2,10 +2,8 @@ import React from 'react';
 import { Select, MenuItem, InputLabel, FormControl } from '@mui/material/';
 
 
-
 const SCascade = (props) => {
-    const { LabelField, Value, idField, Options, PlaceholderInput, NameField, Cascade } = props.Properties;
-    // const { setCascade } = props.setCascade;
+    const { LabelField, Value, idField, Options, PlaceholderInput, NameField } = props.Properties;
     const [value, setValue] = React.useState(Value);
 
 
@@ -40,7 +38,7 @@ const SCascade = (props) => {
             {
                 idField: 8,
                 NameField: 'numhabitante3',
-                LabelField: 'InputCascade3',
+                LabelField: 'InputCascade3 1',
                 Type: 'Number',
                 PlaceholderInput: 'Escriba el numero de personas que viven con usted',
                 Attribut: '',
@@ -53,7 +51,7 @@ const SCascade = (props) => {
             {
                 idField: 9,
                 NameField: 'numhabitantes4',
-                LabelField: 'InputCascade3',
+                LabelField: 'InputCascade3 2',
                 Type: 'Number',
                 PlaceholderInput: 'Escriba el numero de personas que viven con usted',
                 Attribut: '',
@@ -75,38 +73,31 @@ const SCascade = (props) => {
         resultObj.forEach((element) => {
             element.children = idField;
         });
-        console.log("Cascade");
-        console.log(resultObj);
+
         props.setCascade(resultObj);
         setValue(e);
 
-        RenderCascade();
     };
 
-    const RenderCascade = () => {
-        // console.log(Cascade);
-    }
-
-
-
     return (
-        <FormControl sx={{ mt: 2, minWidth: '100%' }}>
-            <InputLabel id={`${NameField}-Label`}>{LabelField}</InputLabel>
-            <Select
-                labelId={`${NameField}-Label`}
-                label={LabelField}
-                id={NameField}
-                value={value}
-                onChange={(e) => handleCascade(e.target.value)}
-            >
-                <MenuItem value="" disabled>
-                    {PlaceholderInput}
-                </MenuItem>
-                {Options.map((element) => (
-                    <MenuItem value={element.id}>{element.Text}</MenuItem>
-                ))}
-            </Select>
-        </FormControl>
+        <>
+            <FormControl sx={{ mt: 2, minWidth: '100%' }}>
+                <InputLabel id={`${NameField}-Label`}>{LabelField}</InputLabel>
+                <Select
+                    labelId={`${NameField}-Label`}
+                    label={LabelField}
+                    id={NameField}
+                    value={value}
+                    onChange={(e) => handleCascade(e.target.value)}>
+                    <MenuItem value="" disabled>
+                        {PlaceholderInput}
+                    </MenuItem>
+                    {Options.map((element) => (
+                        <MenuItem key={`CustomCascadeOptions-${element.id}`} value={element.id}>{element.Text}</MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </>
     );
 
 };
