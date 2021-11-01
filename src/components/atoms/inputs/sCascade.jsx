@@ -60,6 +60,32 @@ const SCascade = (props) => {
                 CascadeTrigger: false,
                 Cascade: {},
                 Show: true
+            },
+            {
+                idField: 10,
+                NameField: 'numhabitante5',
+                LabelField: 'InputCascade5 3',
+                Type: 'Number',
+                PlaceholderInput: 'Escriba el numero de personas que viven con usted',
+                Attribut: '',
+                Value: '',
+                Options: [],
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
+            },
+            {
+                idField: 11,
+                NameField: 'numhabitantes6',
+                LabelField: 'InputCascade6 4',
+                Type: 'Number',
+                PlaceholderInput: 'Escriba el numero de personas que viven con usted',
+                Attribut: '',
+                Value: '',
+                Options: [],
+                CascadeTrigger: false,
+                Cascade: {},
+                Show: true
             }
         ];
 

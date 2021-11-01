@@ -5,7 +5,7 @@
 export default function themeTypography(theme) {
   return {
       //Inter,Poppins, Roboto
-    fontFamily: "Poppins, sans-serif, monospace",
+    fontFamily: "'Libre Franklin', sans-serif",
     h6: {
       fontWeight: 500,
       color: theme.heading,

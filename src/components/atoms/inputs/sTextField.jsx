@@ -15,7 +15,7 @@ const STextField = (props) => {
     switch (Type) {
         case 'TextBox':
             return (
-                <FormControl>
+                <FormControl sx={{ minWidth: '100%' }}>
                     <TextField
                         key={idField}
                         id={NameField}
@@ -30,7 +30,7 @@ const STextField = (props) => {
             );
         case 'Number':
             return (
-                <FormControl >
+                <FormControl sx={{ minWidth: '100%' }}>
                     <TextField
                         key={idField}
                         id={NameField}
@@ -46,7 +46,7 @@ const STextField = (props) => {
             );
         case 'TextArea':
             return (
-                <FormControl>
+                <FormControl sx={{ minWidth: '100%' }}>
                     <TextField
                         key={idField}
                         id={NameField}

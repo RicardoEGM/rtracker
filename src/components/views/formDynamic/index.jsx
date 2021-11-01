@@ -1,6 +1,10 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import InputMapper from '../../molecules/inputMapper';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
 
 
 const FormDynamic = () => {
@@ -80,18 +84,14 @@ const FormDynamic = () => {
                 Attribut: '',
                 Value: '',
                 Options: [
-                    { id: 1, Value: 45, Text: 'Precio 15$', Calling: [6] },
                     {
-                        id: 2,
-                        Value: 46,
-                        Text: 'Precio 25$',
-                        Calling: [7]
+                        id: 1, Value: 45, Text: 'Precio 15$', Calling: [6]
                     },
                     {
-                        id: 3,
-                        Value: 47,
-                        Text: 'Precio 35$',
-                        Calling: [8, 9]
+                        id: 2, Value: 46, Text: 'Precio 25$', Calling: [7]
+                    },
+                    {
+                        id: 3, Value: 47, Text: 'Precio 35$', Calling: [8, 9, 10, 11, 7, 6]
                     }
                 ],
                 CascadeTrigger: true,
@@ -119,36 +119,53 @@ const FormDynamic = () => {
     // });
 
     return (
+
+
         <Box
-            component="form"
-            sx={{
-                display: 'grid',
-                gap: 1,
-                gridTemplateColumns: 'repeat(6, 1fr)',
-                '&.MuiTextField-root': { m: 1, width: '25ch' },
-            }}
-            autoComplete="off">
-            {/* Input  */}
-            {DynamicForm.Fields.map((field, key) => {
-                let render = [];
-                render.push(
-                    <div key={`Div-${field.idField}`} >
-                        <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
-                    </div>);
+            component="div">
+            <Card sx={{ maxWidth: "100%", background: "#f7f7f7" }} >
+                <CardHeader
+                    title="Tracker Name"
+                    subheader="Lorem ipsum dolor sit amet."
 
-                // Cascade Input
-                if (field.CascadeTrigger && field.Cascade.length > 0) {
+                />
+                <CardContent>
+                    <Box
+                        component="form"
+                        sx={{
+                            display: 'grid',
+                            gap: 1,
+                            gridTemplateColumns: 'repeat(7, 1fr)',
+                            '&.MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        autoComplete="off">
+                        {/* Input  */}
+                        {DynamicForm.Fields.map((field, key) => {
+                            let render = [];
+                            render.push(
+                                <div key={`Div-${field.idField}`} >
+                                    <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
+                                </div>);
 
-                    field.Cascade.forEach((fieldCascade, key_fieldCascade) => {
-                        render.push(
-                            <div key={`DivCascade-${field.idField}`} >
-                                <InputMapper key={key_fieldCascade} properties={fieldCascade} addCascadeInputs={addCascadeInputs} />
-                            </div>)
-                    })
-                };
-                return render
-            })}
-        </Box >
+                            // Cascade Input
+                            if (field.CascadeTrigger && field.Cascade.length > 0) {
+
+                                field.Cascade.forEach((fieldCascade, key_fieldCascade) => {
+                                    render.push(
+                                        <div key={`DivCascade-${field.idField}`} >
+                                            <InputMapper key={key_fieldCascade} properties={fieldCascade} addCascadeInputs={addCascadeInputs} />
+                                        </div>)
+                                })
+                            };
+                            return render
+                        })}
+                    </Box >
+                    <Typography variant="body2" color="text.secondary">
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat consequatur magni asperiores incidunt ratione nisi, omnis reiciendis, eveniet culpa veritatis, tempore fugiat illum mollitia quidem?
+                    </Typography>
+                </CardContent>
+            </Card>
+        </Box>
     );
 };
 
