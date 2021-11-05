@@ -12,26 +12,31 @@ const InputMapper = (props) => {
         props.addCascadeInputs(idChildren, children);
     };
 
+    const handleValueMapper = (value, input) => {
+        props.properties.Value = value;
+        props.handleValue(value, input);
+    }
+
     switch (properties.Type) {
         case 'TextBox':
             return (
-                <STextField key={`CustomInput${properties.idField}`} Type={'TextBox'} Properties={properties} />
+                <STextField key={`CustomInput${properties.idField}`} Type={'TextBox'} Properties={properties} handleValueMapper={handleValueMapper} />
             );
         case 'Number':
             return (
-                <STextField key={`CustomInput${properties.idField}`} Type={'Number'} Properties={properties} />
+                <STextField key={`CustomInput${properties.idField}`} Type={'Number'} Properties={properties} handleValueMapper={handleValueMapper} />
             );
         case 'TextArea':
             return (
-                <STextField key={`CustomInput${properties.idField}`} Type={'TextArea'} Properties={properties} />
+                <STextField key={`CustomInput${properties.idField}`} Type={'TextArea'} Properties={properties} handleValueMapper={handleValueMapper} />
             );
         case 'Dropdown':
             return (
-                <SDropdown key={`CustomInput${properties.idField}`} Properties={properties} />
+                <SDropdown key={`CustomInput${properties.idField}`} Properties={properties} handleValueMapper={handleValueMapper} />
             );
         case 'Dropdown Cascade':
             return (
-                <SCascade key={`CustomInput${properties.idField}`} Properties={properties} setCascade={setCascade} />
+                <SCascade key={`CustomInput${properties.idField}`} Properties={properties} setCascade={setCascade} handleValueMapper={handleValueMapper} />
             );
         default:
             return <h1>Do not define input, Input Type is:{properties.Type}</h1>;

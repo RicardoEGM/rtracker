@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import InputMapper from '../../molecules/inputMapper';
 import Card from '@mui/material/Card';
+import Chip from '@mui/material/Chip';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-
+import SettingsIcon from '@mui/icons-material/Settings';
+import SettingFrom from './settings'
 
 const FormDynamic = () => {
+    const SettingRef = useRef();
     const [DynamicForm, setDynamicForm] = React.useState({
         Fields: [
             {
@@ -105,30 +108,73 @@ const FormDynamic = () => {
     const addCascadeInputs = (IdInputs, Children) => {
 
         const FieldsCopy = [...DynamicForm.Fields];
+        const _InputCascade = FieldsCopy.filter((f) => f.idField === IdInputs).at();
 
-        FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade = [];
-        Children.forEach((item) => {
-            FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.push(item);
-        });
+        if (_InputCascade.Cascade.length > 0) { //Esta lleno?
+
+            console.log('Value');
+            console.log(_InputCascade.Value);
+            const findInputs = _InputCascade.Options.filter(f => f.id === _InputCascade.Value).at().Calling;
+
+            console.log('Calling');
+            console.log(findInputs);
+            console.log('Includes');
+            console.log(_InputCascade.Cascade.filter(f => findInputs.includes(f.idField)))
+            // console.log(_InputCascade.Cascade)
+            // if (_InputCascade.Cascade.find(f => f.id === _InputCascade.Value) !== undefined) {
+            //     console.log('hey')
+            // }
+            //else {
+            //     InsertItem(Children);
+            // }
+            // const IDFind = FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.map((item) => item.idField);
+            // const findValues = FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade;
+
+
+            // console.log(IDFind);
+            // console.log(findValues);
+            // console.log(findValues.filter(f => IDFind.includes(f.idField)));
+        } else {
+            // InsertItem(Children);
+            InsertItem(Children);
+        }
 
         setDynamicForm({ Fields: FieldsCopy });
+
+        function InsertItem(Children) {
+            Children.forEach((item) => {
+                FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.push(item);
+            });
+        }
     }
 
-    // setDynamicForm({
-    //     Fields: copyFrom.Fields
-    // });
+    const toggleDrawerRefs = () => {
+        SettingRef.current.toggleDrawer(true);
+    }
+
+    const handleValue = (e, input) => {
+        const FieldsCopy = [...DynamicForm.Fields];
+        FieldsCopy.filter((f) => f.idField === input.idField).at().Value = e;
+        setDynamicForm({ Fields: FieldsCopy });
+    }
 
     return (
 
 
         <Box
             component="div">
+            <SettingFrom ref={SettingRef} />
+
+
             <Card sx={{ maxWidth: "100%", background: "#f7f7f7" }} >
                 <CardHeader
                     title="Tracker Name"
                     subheader="Lorem ipsum dolor sit amet."
-
+                    action={
+                        <Chip icon={<SettingsIcon />} onClick={() => toggleDrawerRefs()} label="Settings" clickable />
+                    }
                 />
+
                 <CardContent>
                     <Box
                         component="form"
@@ -144,7 +190,7 @@ const FormDynamic = () => {
                             let render = [];
                             render.push(
                                 <div key={`Div-${field.idField}`} >
-                                    <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} />
+                                    <InputMapper key={key} properties={field} addCascadeInputs={addCascadeInputs} handleValue={handleValue} />
                                 </div>);
 
                             // Cascade Input
@@ -153,7 +199,7 @@ const FormDynamic = () => {
                                 field.Cascade.forEach((fieldCascade, key_fieldCascade) => {
                                     render.push(
                                         <div key={`DivCascade-${field.idField}`} >
-                                            <InputMapper key={key_fieldCascade} properties={fieldCascade} addCascadeInputs={addCascadeInputs} />
+                                            <InputMapper key={key_fieldCascade} properties={fieldCascade} addCascadeInputs={addCascadeInputs} handleValue={handleValue} />
                                         </div>)
                                 })
                             };
@@ -165,7 +211,7 @@ const FormDynamic = () => {
                     </Typography>
                 </CardContent>
             </Card>
-        </Box>
+        </Box >
     );
 };
 

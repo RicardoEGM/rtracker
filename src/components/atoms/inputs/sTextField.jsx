@@ -9,6 +9,7 @@ const STextField = (props) => {
 
     const handleValue = (e) => {
         setValue(e);
+        props.handleValueMapper(e, props.Properties);
     };
 
 

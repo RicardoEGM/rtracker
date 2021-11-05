@@ -8,6 +8,7 @@ const SDropdown = (props) => {
 
     const handleValue = (e) => {
         setValue(e);
+        props.handleValueMapper(e, props.Properties);
     };
 
     return (

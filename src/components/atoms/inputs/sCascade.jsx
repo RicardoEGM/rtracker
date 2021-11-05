@@ -102,6 +102,7 @@ const SCascade = (props) => {
 
         props.setCascade(resultObj);
         setValue(e);
+        props.handleValueMapper(e, props.Properties);
 
     };
 
