@@ -110,38 +110,25 @@ const FormDynamic = () => {
         const FieldsCopy = [...DynamicForm.Fields];
         const _InputCascade = FieldsCopy.filter((f) => f.idField === IdInputs).at();
 
-        if (_InputCascade.Cascade.length > 0) { //Esta lleno?
+        if (_InputCascade.Cascade.length > 0) {
 
-            console.log('Value');
-            console.log(_InputCascade.Value);
-            const findInputs = _InputCascade.Options.filter(f => f.id === _InputCascade.Value).at().Calling;
+            if (_InputCascade.Cascade.find(f => f.id === _InputCascade.Value) !== undefined) {
+                console.log('hey')
+            }
+            else {
+                InsertItem(Children);
+            }
 
-            console.log('Calling');
-            console.log(findInputs);
-            console.log('Includes');
-            console.log(_InputCascade.Cascade.filter(f => findInputs.includes(f.idField)))
-            // console.log(_InputCascade.Cascade)
-            // if (_InputCascade.Cascade.find(f => f.id === _InputCascade.Value) !== undefined) {
-            //     console.log('hey')
-            // }
-            //else {
-            //     InsertItem(Children);
-            // }
-            // const IDFind = FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.map((item) => item.idField);
-            // const findValues = FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade;
-
-
-            // console.log(IDFind);
-            // console.log(findValues);
-            // console.log(findValues.filter(f => IDFind.includes(f.idField)));
         } else {
-            // InsertItem(Children);
+
             InsertItem(Children);
         }
 
         setDynamicForm({ Fields: FieldsCopy });
 
         function InsertItem(Children) {
+            //TODO: Buscar una forma que no borre la data, si no que filtre entre mostrar y no mostrar
+            FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade = [];
             Children.forEach((item) => {
                 FieldsCopy.filter((f) => f.idField === IdInputs).at().Cascade.push(item);
             });
