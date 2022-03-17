@@ -1,17 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-// import Button from '@mui/material/Button';
-// import List from '@mui/material/List';
-// import Divider from '@mui/material/Divider';
-// import ListItem from '@mui/material/ListItem';
-// import ListItemIcon from '@mui/material/ListItemIcon';
-// import ListItemText from '@mui/material/ListItemText';
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
+import Button from '@mui/material/Button';
+
 import { FormControl, TextField, Select, MenuItem, InputLabel } from '@mui/material/';
 
 const SettingFrom = forwardRef((props, ref) => {
     const [state, setState] = useState(false);
+    const [jsonTest, setjsonTest] = useState(false);
 
     const toggleDrawer = (open) => {
         setState(open);
@@ -21,6 +17,7 @@ const SettingFrom = forwardRef((props, ref) => {
         toggleDrawer,
     }));
 
+    
 
     return (
         <div>
@@ -63,6 +60,9 @@ const SettingFrom = forwardRef((props, ref) => {
                             margin="normal"
                             variant="outlined"
                         />
+                    </FormControl>
+                    <FormControl sx={{ minWidth: '100%' }}>
+                    <Button variant="contained">Contained</Button>
                     </FormControl>
                 </Box>
             </Drawer>
