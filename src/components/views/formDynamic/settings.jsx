@@ -7,7 +7,8 @@ import { FormControl, TextField, Select, MenuItem, InputLabel } from '@mui/mater
 
 const SettingFrom = forwardRef((props, ref) => {
     const [state, setState] = useState(false);
-    const [jsonTest, setjsonTest] = useState(false);
+    const [jsonTest, setjsonTest] = useState("");
+    const {renderFunction} = props;
 
     const toggleDrawer = (open) => {
         setState(open);
@@ -15,8 +16,14 @@ const SettingFrom = forwardRef((props, ref) => {
 
     useImperativeHandle(ref, () => ({
         toggleDrawer,
+        getJsonRender: () => {
+            return jsonTest;
+        }
     }));
 
+    const handleValue = (value) => {
+        setjsonTest(value);
+    };
     
 
     return (
@@ -53,16 +60,16 @@ const SettingFrom = forwardRef((props, ref) => {
                             key={"Settings-Insert"}
                             label={"Insert Example"}
                             placeholder={"Json"}
-                            // onChange={(e) => handleValue(e.target.value)}
+                            onChange={(e) => handleValue(e.target.value)}
                             multiline
                             rows={4}
-                            // value={value}
+                            value={jsonTest}
                             margin="normal"
                             variant="outlined"
                         />
                     </FormControl>
                     <FormControl sx={{ minWidth: '100%' }}>
-                    <Button variant="contained">Contained</Button>
+                    <Button variant="contained" onClick={renderFunction}>Contained</Button>
                     </FormControl>
                 </Box>
             </Drawer>

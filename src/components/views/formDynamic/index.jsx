@@ -104,7 +104,6 @@ const FormDynamic = () => {
         ]
     });
 
-
     const addCascadeInputs = (IdInputs, Children) => {
 
         const FieldsCopy = [...DynamicForm.Fields];
@@ -141,17 +140,33 @@ const FormDynamic = () => {
 
     const handleValue = (e, input) => {
         const FieldsCopy = [...DynamicForm.Fields];
-        FieldsCopy.filter((f) => f.idField === input.idField).at().Value = e;
+        if (FieldsCopy.filter((f) => f.idField === input.idField).at() !== undefined) {
+            FieldsCopy.filter((f) => f.idField === input.idField).at().Value = e;
+        } else {
+            //TODO: Hacer mas corto el codigo
+            for (var father in FieldsCopy) {
+                if (father.Type === "Dropdown Cascade" && father.Cascade.length > 0) {
+                    for (var child in father.Cascade) {
+                        if (child.id === input.idField) {
+                            child.Value = e;
+                        }
+                    }
+                }
+
+            }
+        }
         setDynamicForm({ Fields: FieldsCopy });
     }
 
+    const renderJson = () => {
+        //TODO: Buscar una forma para convertir en formato valido para el state
+        // setDynamicForm(SettingRef.current.getJsonRender()));
+
+    }
     return (
-
-
         <Box
             component="div">
-            <SettingFrom ref={SettingRef} />
-
+            <SettingFrom ref={SettingRef} renderFunction={renderJson} />
 
             <Card sx={{ maxWidth: "100%", background: "#f7f7f7" }} >
                 <CardHeader
