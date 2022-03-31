@@ -7,7 +7,7 @@ var formController = require('../controller/formController');
 // var firebaseAuthenticationValidator = require('../app/FirebaseAuthenticationComponent/firebaseAuthentication.validator');
 
 // get user profile - (body: [uid]) - (uid is required)
-router.get('/getForm', formController.GetFormByDoc);
+router.get('/form/getForm/:id', formController.GetFormByDoc);
 
 
 
