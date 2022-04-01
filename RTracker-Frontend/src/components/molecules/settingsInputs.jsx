@@ -45,7 +45,7 @@ const SettingFrom = forwardRef((props, ref) => {
                             label="Format inputs"
                             labelId={`FormaTypeInput-Label`}
                             id={"FormaTypeInput"}
-                        // value={value}
+                            value={""}
                         // onChange={(e) => handleValue(e.target.value)}
                         >
                             <MenuItem value="" disabled> Select to Format </MenuItem>

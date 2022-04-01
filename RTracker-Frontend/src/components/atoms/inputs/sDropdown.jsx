@@ -9,7 +9,13 @@ const SDropdown = (props) => {
     const handleValue = (e) => {
         setValue(e);
         props.handleValueMapper(e, props.Properties);
+
+        if (value === null && value.trim().length === 0) {
+            setValue("0");
+        }
     };
+
+  
 
     return (
         <FormControl key={idField} sx={{ mt: 2, minWidth: '100%' }}>
@@ -23,7 +29,7 @@ const SDropdown = (props) => {
                 value={value}
                 onChange={(e) => handleValue(e.target.value)}
             >
-                <MenuItem value="" disabled>
+                <MenuItem value="0" disabled>
                     {PlaceholderInput}
                 </MenuItem>
                 {Options.map((element) => (

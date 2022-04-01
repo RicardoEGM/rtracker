@@ -7,6 +7,10 @@ const STextField = (props) => {
 
     const [value, setValue] = React.useState(Value);
 
+    if (value === null) {
+        setValue("");
+    }
+
     const handleValue = (e) => {
         setValue(e);
         props.handleValueMapper(e, props.Properties);

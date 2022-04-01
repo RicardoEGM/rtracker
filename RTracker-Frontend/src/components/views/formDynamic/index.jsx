@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import SettingFrom from './settings'
+import SettingFrom from '../../molecules/settingsInputs'
 import FormMethod from '../../../apis/rtracker-api'
 import Box from '@mui/material/Box';
 import InputMapper from '../../molecules/inputMapper';
@@ -76,13 +76,16 @@ const FormDynamic = () => {
 
     //firth data load
     useEffect(() => {
-        // FormMethod.Form.GetFields("avNXK0iEY9URfqlCLI1s").then((res) => {
-           
-        //     setDynamicForm(res.data.response || { Fields: [] });
-        // }).catch((err) => {
-        //     console.log(err)
-        //     //TODO: Message error
-        // });
+        if (DynamicForm.Fields.length === 0) {
+            console.log('first load');
+            FormMethod.Form.GetFields("avNXK0iEY9URfqlCLI1s").then((res) => {
+
+                setDynamicForm(res.data.response || { Fields: [] });
+            }).catch((err) => {
+                console.log(err)
+                //TODO: Message error
+            });
+        }
     });
     return (
         <Box

@@ -6,6 +6,9 @@ const SCascade = (props) => {
     const { LabelField, Value, idField, Options, PlaceholderInput, NameField } = props.Properties;
     const [value, setValue] = React.useState(Value);
 
+    if (value === null) {
+        setValue("");
+    }
 
     const handleCascade = (e) => {
         const callback = [
