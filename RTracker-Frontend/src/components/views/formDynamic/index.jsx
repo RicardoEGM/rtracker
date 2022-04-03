@@ -74,8 +74,7 @@ const FormDynamic = () => {
 
     }
 
-    //firth data load
-    useEffect(() => {
+    const getFields = () => {
         if (DynamicForm.Fields.length === 0) {
             console.log('first load');
             FormMethod.Form.GetFields("avNXK0iEY9URfqlCLI1s").then((res) => {
@@ -86,7 +85,12 @@ const FormDynamic = () => {
                 //TODO: Message error
             });
         }
-    });
+    }
+    //firth data load
+    useEffect(() => {
+        getFields();
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <Box
             component="div">

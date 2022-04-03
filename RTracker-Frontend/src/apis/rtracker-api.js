@@ -9,7 +9,7 @@ const instance = Axios.create({
   //   },
 });
 
-const FormMethod = {
+const Api = {
   Form: {
     GetFields: (idForm) =>
       instance({
@@ -17,6 +17,14 @@ const FormMethod = {
         url: `form/getForm/${idForm}`,
       }),
   },
+  Tracker: {
+    Add: (Data) =>
+      instance({
+        method: "POST",
+        url: `tracker/add`,
+        data: Data,
+      }),
+  },
 };
 
-export default FormMethod;
+export default Api;
