@@ -8,6 +8,7 @@ import React from 'react';
 // const FormDynamic = lazy(() => import('../pages/formDynamic/index'));
 import FormDynamic from '../components/views/formDynamic/index'
 import CreateFrom from '../components/views/createFrom/index'
+import Trackers from '../components/views/trackers/tracker'
 import Navbar from '../components/organisms/navbar'
 
 const FormDynamicRouter = {
@@ -21,6 +22,14 @@ const FormDynamicRouter = {
         {
             path: '/CreateFrom/',
             element: <CreateFrom />
+        },
+        {
+            path: '/CreateFrom/:id',
+            element: <CreateFrom />
+        },
+        {
+            path: '/Trackers/',
+            element: <Trackers />
         },
     ]
 };

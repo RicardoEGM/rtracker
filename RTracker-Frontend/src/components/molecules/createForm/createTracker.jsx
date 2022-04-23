@@ -24,8 +24,12 @@ const CreateTracker = forwardRef((prop, ref) => {
 
 
     useImperativeHandle(ref, () => ({
-        getStatus: () => {
-            return status;
+        getStatus: async () => {
+            let copyStatus = { ...status };
+            const res = await Api.Tracker.Add(status.Tracker);
+            copyStatus._idTracker = res.data.response._id;
+            await setTracker(copyStatus)
+            return copyStatus;
         }
     }));
 
@@ -38,10 +42,6 @@ const CreateTracker = forwardRef((prop, ref) => {
     }
 
     const sendData = async () => {
-        let copyStatus = { ...status };
-        const res = await Api.Tracker.Add(status.Tracker);
-        copyStatus._idTracker = res.data.response._id;
-        setTracker(copyStatus);
         prop.step();
     }
 

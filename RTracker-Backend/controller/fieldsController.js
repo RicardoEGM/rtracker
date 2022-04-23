@@ -2,12 +2,33 @@ var appFirebase = require("../firebase/firebase");
 
 const db = appFirebase.firestore();
 
+exports.GetFields = async function (_req, res) {
+  try {
+    const fields = await db.collection("form-collection").get();
+
+    let data = [];
+
+    fields.forEach((doc) => {
+      data.push(doc.data());
+    });
+  } catch (error) {
+    res.json({
+      success: true,
+      response: data,
+      message: error,
+    });
+  }
+};
+
 exports.GetFormByDoc = async function (req, res) {
-  const fields = db.collection("field-collection").doc(req.params.id);
-  const doc = await fields.get();
+  console.log(req.params.id);
+  const fields = await db
+    .collection("form-collection")
+    .doc(req.params.id)
+    .get();
 
   res.json({
     success: true,
-    response: doc.data(),
+    response: fields.data(),
   });
 };

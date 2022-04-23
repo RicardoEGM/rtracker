@@ -78,8 +78,9 @@ const FormDynamic = () => {
         if (DynamicForm.Fields.length === 0) {
             console.log('first load');
             FormMethod.Form.GetFields("avNXK0iEY9URfqlCLI1s").then((res) => {
-
+                console.log(res.data.response);
                 setDynamicForm(res.data.response || { Fields: [] });
+
             }).catch((err) => {
                 console.log(err)
                 //TODO: Message error

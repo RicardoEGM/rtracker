@@ -18,7 +18,7 @@ app.use(
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         var msg =
-          "The CORS policy for this origin doesnt " +
+          "The CORS policy for this origin  " +
           "allow access from the particular origin.";
         return callback(new Error(msg), false);
       }
@@ -30,7 +30,7 @@ app.use(
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
 
 app.use("/api", routerFields);
 app.use("/api", routerTracker);

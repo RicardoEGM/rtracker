@@ -1,22 +1,48 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import {
     Box, Card, CardContent, Tab
 } from '@mui/material/';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import CreateTracker from '../../molecules/createForm/createTracker';
+import api from '../../../apis/rtracker-api'
 
 
 const MainCreate = () => {
     const CreateTrackerRef = useRef();
     const [value, setValue] = React.useState('1');
+    const [status, setStatus] = React.useState();
+    let { id } = useParams();
+
+
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const ChangesStep = () => {
-        // setValue('2');
-        console.log(CreateTrackerRef.current.getStatus());
+    const ChangesStep = async () => {
+        // setTimeout(async () => {
+        CreateTrackerRef.current.getStatus().then(async (res) => {
+            await setStatus(res);
+            if (res._idTracker !== null) {
+                setValue('2');
+            }
+        })
+
+
+        //TODO: Add tracker in state and insert valor in component createTracker
+        const GetTracker = async () => {
+            let res = await api.Tracker.GetTrackerByID(id);
+            console.log(res.data.response);
+        }
+        useEffect(() => {
+            if (id !== undefined) {
+
+            }
+        }, []);// eslint-disable-line react-hooks/exhaustive-deps
+
+
+        // }, 1000);
     }
 
     return (

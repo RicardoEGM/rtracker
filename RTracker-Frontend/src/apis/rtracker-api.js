@@ -18,6 +18,16 @@ const Api = {
       }),
   },
   Tracker: {
+    GetTracker: () =>
+      instance({
+        method: "GET",
+        url: `tracker/get`,
+      }),
+    GetTrackerByID: (ID) =>
+      instance({
+        method: "GET",
+        url: `tracker/get/${ID}`,
+      }),
     Add: (Data) =>
       instance({
         method: "POST",
