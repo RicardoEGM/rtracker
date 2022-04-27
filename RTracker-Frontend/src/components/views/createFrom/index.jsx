@@ -5,12 +5,13 @@ import {
 } from '@mui/material/';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import CreateTracker from '../../molecules/createForm/createTracker';
+import CreateFields from '../../molecules/createFields/fields';
 import api from '../../../apis/rtracker-api'
 
 
 const MainCreate = () => {
     const CreateTrackerRef = useRef();
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = React.useState('2');
     const [status, setStatus] = React.useState();
     let { id } = useParams();
 
@@ -28,22 +29,20 @@ const MainCreate = () => {
                 setValue('2');
             }
         })
-
-
-        //TODO: Add tracker in state and insert valor in component createTracker
-        const GetTracker = async () => {
-            let res = await api.Tracker.GetTrackerByID(id);
-            console.log(res.data.response);
-        }
-        useEffect(() => {
-            if (id !== undefined) {
-
-            }
-        }, []);// eslint-disable-line react-hooks/exhaustive-deps
-
-
-        // }, 1000);
     }
+
+    //TODO: Add tracker in state and insert valor in component createTracker
+    const GetTracker = async () => {
+        let res = await api.Tracker.GetTrackerByID(id);
+        setStatus(res.data.response);
+    }
+
+    useEffect(() => {
+
+        if (id !== undefined) {
+            GetTracker();
+        }
+    }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Box
@@ -58,8 +57,8 @@ const MainCreate = () => {
                                 <Tab label="permissions" value="3" disabled />
                             </TabList>
                         </Box>
-                        <TabPanel value="1"><CreateTracker step={ChangesStep} ref={CreateTrackerRef} /></TabPanel>
-                        <TabPanel value="2">Item Two</TabPanel>
+                        <TabPanel value="1"><CreateTracker step={ChangesStep} ref={CreateTrackerRef} data={status} _id={id} /></TabPanel>
+                        <TabPanel value="2"><CreateFields /></TabPanel>
                         <TabPanel value="3">Item Three</TabPanel>
                     </TabContext>
                 </CardContent>

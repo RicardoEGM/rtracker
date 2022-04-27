@@ -44,7 +44,7 @@ exports.GetTracker = async function (_req, res) {
   }
 };
 
-exports.GetTrackerByID = async function (_req, res) {
+exports.GetTrackerByID = async function (req, res) {
   try {
     const tracker = await db.collection("tracker").doc(req.params.id).get();
 

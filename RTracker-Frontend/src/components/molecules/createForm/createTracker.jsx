@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle, useEffect } from 'react';
 
 
 import {
@@ -10,7 +10,7 @@ import {
 import Api from '../../../apis/rtracker-api'
 
 const CreateTracker = forwardRef((prop, ref) => {
-    const [status, setTracker] = React.useState({
+    const defaultData = {
         Tracker: {
             TrackerName: '',
             TrackerDescription: '',
@@ -19,9 +19,11 @@ const CreateTracker = forwardRef((prop, ref) => {
             TrackerStyle: '0',
             TrackerTimer: false
         },
-        _idTracker: null
-    });
-
+        _idTracker: null,
+        Type: "Create"
+    }
+    const { data, _id } = prop;
+    const [status, setTracker] = React.useState(defaultData);
 
     useImperativeHandle(ref, () => ({
         getStatus: async () => {
@@ -44,6 +46,12 @@ const CreateTracker = forwardRef((prop, ref) => {
     const sendData = async () => {
         prop.step();
     }
+
+    useEffect(() => {
+        if (data !== undefined) {
+            setTracker({ Tracker: data, _idTracker: _id, Type: "Update" })
+        }
+    }, [data, _id]);
 
     return (
         <Box
@@ -148,7 +156,7 @@ const CreateTracker = forwardRef((prop, ref) => {
                             </FormGroup>
                         </Grid>
                         <Grid item xs={12} md={8}>
-                            <Button variant="contained" onClick={() => sendData()}>Send</Button>
+                            <Button variant="contained" onClick={() => sendData()}>{status.Type === "Create" ? "Save" : "Edit"}</Button>
                         </Grid>
                     </Grid>
                     {/* </Box > */}
