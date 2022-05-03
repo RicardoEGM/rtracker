@@ -1,23 +1,24 @@
-var express = require("express");
-var cors = require("cors");
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const swaggerUI = require("swagger-ui-express");
 
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const routerFields = require("./router/router_fields");
+const routerTracker = require("./router/router_tracker");
+const swaggerDoc = require("./swagger.json");
 
-var routerFields = require("./router/router_fields");
-var routerTracker = require("./router/router_tracker");
-
-var app = express();
-var port = process.env.PORT || 3525;
+const app = express();
+const port = process.env.PORT || 3525;
 
 //TODO: ANOTHER FILE
-var allowedOrigins = ["http://localhost:3000", "http://localhost:3525"];
+const allowedOrigins = ["http://localhost:3000", "http://localhost:3525"];
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
-        var msg =
+        const msg =
           "The CORS policy for this origin  " +
           "allow access from the particular origin.";
         return callback(new Error(msg), false);
@@ -34,6 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/api", routerFields);
 app.use("/api", routerTracker);
+app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 app.listen(port, function () {
   console.log(`Server running in http://localhost:${port}`);
