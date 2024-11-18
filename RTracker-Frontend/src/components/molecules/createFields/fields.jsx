@@ -7,7 +7,6 @@ import {
     Switch, Grid, ListSubheader, Button
 } from '@mui/material/';
 
-import Add from '@mui/icons-material/Add';
 
 import Api from '../../../apis/rtracker-api'
 
@@ -114,7 +113,7 @@ const CreateFields = forwardRef((prop, ref) => {
 
                                             }}
                                         >
-                                            <Button endIcon={<Add />}>Add</Button>
+                                            <Button >Add</Button>
                                         </Box>
                                     </CardContent>
                                 </Card>

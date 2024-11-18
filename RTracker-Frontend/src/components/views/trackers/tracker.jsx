@@ -3,7 +3,6 @@ import {
     Box, Card, CardContent,
     TableContainer, Table, TableHead, TableRow, TableCell, TableBody, IconButton
 } from '@mui/material/';
-import EditIcon from '@mui/icons-material/Edit';
 import Tooltip from '@mui/material/Tooltip';
 import api from '../../../apis/rtracker-api'
 import { Link } from 'react-router-dom'
@@ -51,7 +50,7 @@ const Trackers = () => {
                                         <TableCell>{row.TrackerDescription}</TableCell>
                                         <TableCell>{row.TrackerType}</TableCell>
                                         <TableCell>COOL</TableCell>
-                                        <TableCell><Tooltip title="Edit Tracker" placement="top"><IconButton aria-label="delete" component={Link} to={`/CreateFrom/${row._id}`}><EditIcon /></IconButton></Tooltip></TableCell>
+                                        <TableCell><Tooltip title="Edit Tracker" placement="top"><IconButton aria-label="delete" component={Link} to={`/CreateFrom/${row._id}`}>< ></></IconButton></Tooltip></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

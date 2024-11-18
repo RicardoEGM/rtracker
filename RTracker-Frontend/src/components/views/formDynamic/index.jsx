@@ -8,7 +8,6 @@ import Chip from '@mui/material/Chip';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import SettingsIcon from '@mui/icons-material/Settings';
 
 const FormDynamic = () => {
     const SettingRef = useRef();
@@ -93,7 +92,7 @@ const FormDynamic = () => {
     }, []);// eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Box
+        <div
             component="div">
             <SettingFrom ref={SettingRef} renderFunction={renderJson} />
 
@@ -102,12 +101,12 @@ const FormDynamic = () => {
                     title="Tracker Name"
                     subheader="Lorem ipsum dolor sit amet."
                     action={
-                        <Chip icon={<SettingsIcon />} onClick={() => toggleDrawerRefs()} label="Settings" clickable />
+                        <Chip onClick={() => toggleDrawerRefs()} label="Settings" clickable />
                     }
                 />
 
                 <CardContent>
-                    <Box
+                    <div
                         component="form"
                         sx={{
                             display: 'grid',
@@ -137,13 +136,13 @@ const FormDynamic = () => {
                                 };
                                 return render
                             })}
-                    </Box >
+                    </ div>
                     <Typography variant="body2" color="text.secondary">
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat consequatur magni asperiores incidunt ratione nisi, omnis reiciendis, eveniet culpa veritatis, tempore fugiat illum mollitia quidem?
                     </Typography>
                 </CardContent>
             </Card>
-        </Box >
+        </div >
     );
 };
 

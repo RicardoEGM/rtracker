@@ -1,7 +1,5 @@
 // assets
 // import { IconDashboard } from '@tabler/icons';
-import DynamicFormIcon from '@mui/icons-material/DynamicForm';
-import DesignServicesIcon from '@mui/icons-material/DesignServices';
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
@@ -15,7 +13,7 @@ const itemList = [{
             title: 'Form',
             type: 'item',
             url: '/FormDynamic/',
-            icon: DynamicFormIcon,
+            icon: <i>B</i>,
             breadcrumbs: false
         }
     ]
@@ -30,7 +28,7 @@ const itemList = [{
             title: 'Design',
             type: 'item',
             url: '/FormDynamic/',
-            icon: DesignServicesIcon,
+            icon: <i>A</i>,
             breadcrumbs: false
         }
     ]

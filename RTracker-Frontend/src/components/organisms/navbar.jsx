@@ -5,9 +5,7 @@ import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import Box from '@mui/material/Box';
 // import Drawer from '@mui/material/Drawer';
 // import AppBar from '@mui/material/AppBar';
@@ -18,8 +16,6 @@ import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DynamicFormIcon from '@mui/icons-material/DynamicForm';
-import DesignServicesIcon from '@mui/icons-material/DesignServices';
 
 const drawerWidth = 240;
 
@@ -117,7 +113,7 @@ export default function Navbar() {
                             ...(open && { display: 'none' }),
                         }}
                     >
-                        <MenuIcon />
+                        Menu
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         Mini variant drawer
@@ -127,7 +123,7 @@ export default function Navbar() {
             <DrawerStyled variant="permanent" open={open}>
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? ">" : "<"}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
@@ -135,7 +131,7 @@ export default function Navbar() {
                     <Link to="/FormDynamic/">
                         <ListItem button key={`ListItem-${0}`}>
                             <ListItemIcon>
-                                <DynamicFormIcon />
+                                A
                             </ListItemIcon>
                             <ListItemText primary={"Form"} />
                         </ListItem>
@@ -143,7 +139,7 @@ export default function Navbar() {
                     <Link to="/CreateFrom/">
                         <ListItem button key={`ListItem-${1}`}>
                             <ListItemIcon>
-                                <DesignServicesIcon />
+                                B
                             </ListItemIcon>
                             <ListItemText primary={"Create From"} />
                         </ListItem>
@@ -151,7 +147,7 @@ export default function Navbar() {
                     <Link to="/Trackers/">
                         <ListItem button key={`ListItem-${3}`}>
                             <ListItemIcon>
-                                <DesignServicesIcon />
+                                C
                             </ListItemIcon>
                             <ListItemText primary={"Design"} />
                         </ListItem>
